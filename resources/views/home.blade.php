@@ -42,6 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach($medicines as $medicine)
                                 <tr>
                                     <td>
@@ -57,8 +58,8 @@
                                         {{ $medicine->potency }}
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
-                                            Edit Details
+                                        <button type="button" class="btn btn-primary">
+                                            <a href="/show/{{ $medicine->id }}" style="color: white;">Edit Details</a>
                                         </button>
                                         <button type="button" class="btn btn-danger">
                                         <a href="/delete/{{$medicine->id}}" style="color: white;">
@@ -66,31 +67,6 @@
                                         </a>    
                                         </button>
                                     </td>
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModelLabel" aria-hidden="true">
-                                      <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="addModelLabel">Edit Details</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <form method="POST" action="/update/{id}">
-                                          <div class="modal-body">
-                                            
-                                                {{ $medicine->id }}
-        
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success">Save changes</button>
-                                          </div>
-                                          </form>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -111,12 +87,13 @@
                                 @csrf
                                 <label for="medicine_name">Medicine Name :</label>
                                 <input type="text" class="form-control" name="medicine_name">
-                                <label for="medicine_quantity" min="0" max="10000">Medicine Quantity :</label>
-                                <input type="number" class="form-control" name="medicine_quantity">
+                                <label for="medicine_quantity">Medicine Quantity :</label>
+                                <input type="number" min="0" max="10000" class="form-control" name="medicine_quantity">
                                 <label for="medicine_price">Medicine Price :</label>
                                 <input type="text" class="form-control" name="medicine_price">
                                 <label for="medicine_potency">Medicine Potency :</label>
                                 <input type="text" class="form-control" name="medicine_potency">
+                        
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -127,29 +104,26 @@
                       </div>
                     </div>
                 </div>
+                @if($count>=15)
+                <div class="card-footer">
+                    {{ $medicines->links() }}
+                </div>
+                @endif
+                <br>
+                <span>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                </span>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
 @endsection

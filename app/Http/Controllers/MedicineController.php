@@ -34,9 +34,9 @@ class MedicineController extends Controller
 
     public function index()
     {
-    	$medicines = Medicine::all();
+    	$medicines = Medicine::paginate(15);
 
-    	$count =  count($medicines);
+    	$count = count($medicines);
 
     	return view('home',compact(['medicines','count']));
     }
@@ -48,5 +48,30 @@ class MedicineController extends Controller
         $medicine->delete();
 
         return redirect()->to('/home');
+    }
+
+    public function update(Request $request,$id)
+    {
+        $medicine = Medicine::where('id',$id)->first();
+
+        $validated = $request->validate([
+            'medicine_quantity' => 'required|integer',
+            'medicine_price' => 'required|numeric'
+        ]);
+
+        $medicine->quantity = $request->medicine_quantity;
+        $medicine->price = $request->medicine_price;
+
+        $medicine->save();
+
+        return redirect()->to('/home');   
+    }
+
+    public function show($id)
+    {
+        $medicine = Medicine::where('id',$id)->first();
+
+        if($medicine)
+            return view('edit',compact(['medicine']));
     }
 }
