@@ -52,17 +52,17 @@ class MedicineController extends Controller
 
     public function update(Request $request,$id)
     {
-        $medicine = Medicine::where('id',$id)->first();
-
         $validated = $request->validate([
             'medicine_quantity' => 'required|integer',
             'medicine_price' => 'required|numeric'
         ]);
 
+        $medicine = Medicine::where('id',$id)->first();
+
         $medicine->quantity = $request->medicine_quantity;
         $medicine->price = $request->medicine_price;
 
-        $medicine->save();
+        $medicine->update();
 
         return redirect()->to('/home');   
     }
