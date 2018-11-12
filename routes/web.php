@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'MedicineController@index')->name('home');
+
+Route::get('/delete/{id}','MedicineController@delete');
+
+Route::post('/add','MedicineController@store');

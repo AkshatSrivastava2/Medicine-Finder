@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medicine extends Model
 {
-    protected $table="medicine";
+    protected $table = "medicine";
+
+    protected $fillable = ['name','quantity','price','potency','user_id'];
 
     public function user()
     {
