@@ -27,6 +27,4 @@ Route::post('/update/{id}','MedicineController@update');
 
 Route::get('/show/{id}','MedicineController@show');
 
-Route::get('/search/{name}', function ($name) {
-    return \App\Medicine::search($name)->get();
-});
+Route::get('/search','MedicineController@search');

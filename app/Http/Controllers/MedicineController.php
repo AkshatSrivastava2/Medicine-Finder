@@ -34,7 +34,8 @@ class MedicineController extends Controller
 
     public function index()
     {
-    	$medicines = Medicine::paginate(15);
+    	$medicines = Medicine::orderBy('quantity','asc')
+                            ->paginate(15);
 
     	$count = count($medicines);
 
@@ -73,5 +74,16 @@ class MedicineController extends Controller
 
         if($medicine)
             return view('edit',compact(['medicine']));
+    }
+
+    public function search()
+    {
+        $search = $_GET['search'];
+
+        $result = \App\Medicine::search($search)->get();
+
+        $count = count($result);
+
+        return view('search',compact('result','count'));
     }
 }
