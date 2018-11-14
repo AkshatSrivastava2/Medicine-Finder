@@ -10,10 +10,17 @@
                     <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#addModal">
                         Add Medicine
                     </button>
+                    
+                    <form method="GET" action="/search">
+                        @csrf
+                        <input type="text" name="search">
+                        <button>
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="card-body">
-
                     @if($count==0)
                     <div class="card-text">
                         No Medicines available.
