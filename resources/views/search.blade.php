@@ -29,6 +29,9 @@
                                     <th>
                                         Potency Of Medicine Available  
                                     </th>
+                                    <th>
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,6 +50,16 @@
                                     </td>
                                     <td>
                                         {{ $result[$i]->potency }}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary">
+                                        <a href="/show/{{ $result[$i]->id }}" style="color: white;">Edit Details</a>
+                                        </button>
+                                        <button type="button" class="btn btn-danger">
+                                        <a href="/delete/{{ $result[$i]->id }}" style="color: white;">
+                                        Delete Medicine 
+                                        </a>    
+                                        </button>
                                     </td>
                                 </tr>
 							@endfor
